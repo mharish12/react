@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import FilesForm from "./FilesForm";
+import Button from '../Button/Button'
 
 export default function NewFile(props) {
 
@@ -26,9 +27,9 @@ export default function NewFile(props) {
     }
 
     return (
-        <div>
+        <div style={ }>
             {!isEdit && (
-                <button onClick={startEditingHandler}>Add New File</button>
+                <Button onClick={startEditingHandler}>Add New File</Button>
             )}
             {isEdit && (
                 <FilesForm

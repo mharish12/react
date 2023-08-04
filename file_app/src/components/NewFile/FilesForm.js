@@ -9,7 +9,7 @@ function FilesForm(props) {
 
     const fileHandler = (event) => {
         event.preventDefault()
-        console.log("event.target.value", event.target.value)
+        // console.log("event.target.value", event.target.value)
         // console.log(event.target.value)
         if (event.target.value !== null) {
             setFormIsValid(true)
@@ -31,7 +31,7 @@ function FilesForm(props) {
     }
 
     return (
-        <form onSubmit={fileSubmitHandler}>
+        <form onSubmit={fileSubmitHandler} className="">
             <div>
                 <div>
                     <label htmlFor="file">File details</label>
@@ -51,7 +51,6 @@ function FilesForm(props) {
                     <button type="submit" disabled={!formIsValid}>Add File</button>
                 </div>
             </div>
-
         </form>);
 }
 
