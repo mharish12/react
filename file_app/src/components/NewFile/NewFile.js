@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import FilesForm from "./FilesForm";
 import Button from '../Button/Button'
+import classes from './NewFile.module.css'
 
 export default function NewFile(props) {
 
@@ -27,7 +28,7 @@ export default function NewFile(props) {
     }
 
     return (
-        <div style={ }>
+        <div className={classes.outline}>
             {!isEdit && (
                 <Button onClick={startEditingHandler}>Add New File</Button>
             )}
