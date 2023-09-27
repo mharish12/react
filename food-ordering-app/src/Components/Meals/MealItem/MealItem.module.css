@@ -12,12 +12,11 @@
 
 .description {
   font-style: italic;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .price {
   margin-top: 0.25rem;
   font-weight: bold;
-  color: #cd6202;
+  color: #ad5502;
   font-size: 1.25rem;
 }

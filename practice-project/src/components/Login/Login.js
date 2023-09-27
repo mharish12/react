@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 
-import Card from "../UI/Card/Card";
-import classes from "./Login.module.css";
-import Button from "../UI/Button/Button";
-import AuthContext from "../../store/auth-context";
-import Input from "../UI/input/Input";
+import Card from '../UI/Card/Card';
+import classes from './Login.module.css';
+import Button from '../UI/Button/Button';
+import AuthContext from '../../store/auth-context';
+import Input from '../UI/input/Input';
 
 const Login = (props) => {
   // const [enteredEmail, setEnteredEmail] = useState('');
@@ -17,33 +17,34 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   const emailReducer = (state, action) => {
-    console.log("action: ", action);
+    console.log('emailReducer: ', state, action);
     let returnVal = {};
-    if (action.type === "USER_INPUT") {
+    if (action.type === 'USER_INPUT') {
       returnVal = {
-        value: action.val !== undefined ? action.val : "",
+        value: action.val !== undefined ? action.val : '',
         isValid:
           action.val !== undefined && action.val !== null
-            ? action.val.includes("@")
+            ? action.val.includes('@')
             : false,
       };
-    } else if (action.type === "INPUT_BLUR") {
+    } else if (action.type === 'INPUT_BLUR') {
       returnVal = {
         value: state.val,
         isValid:
           action.val !== undefined && action.val !== null
-            ? action.val.includes("@")
+            ? action.val.includes('@')
             : false,
       };
     } else {
-      returnVal = { value: "", isValid: false };
+      returnVal = { value: '', isValid: false };
     }
-    console.log("returnVal: ", returnVal);
+    // console.log('returnVal: ', returnVal);
     return returnVal;
   };
 
   const passwordReducer = (state, action) => {
-    if (action.type === "USER_INPUT") {
+    console.log('passwordReducer', state, action);
+    if (action.type === 'USER_INPUT') {
       return {
         value: action.val,
         isValid:
@@ -52,7 +53,7 @@ const Login = (props) => {
             : false,
       };
     }
-    if (action.type === "INPUT_BLUR") {
+    if (action.type === 'INPUT_BLUR') {
       return {
         value: state.value,
         isValid:
@@ -61,16 +62,16 @@ const Login = (props) => {
             : false,
       };
     }
-    return { value: "", isValid: false };
+    return { value: '', isValid: false };
   };
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
-    value: "",
+    value: '',
     isValid: null,
   });
 
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-    value: "",
+    value: '',
     isValid: null,
   });
 
@@ -87,19 +88,19 @@ const Login = (props) => {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("Checking form validity!");
+      console.log('Checking form validity!');
       setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     return () => {
-      console.log("CLEANUP");
+      console.log('CLEANUP');
       clearTimeout(identifier);
     };
   }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
-    dispatchEmail({ type: "USER_INPUT", val: event.target.value });
+    dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
 
     // setFormIsValid(
     //   emailState.isValid && passwordState.isValid
@@ -107,21 +108,21 @@ const Login = (props) => {
   };
 
   const passwordChangeHandler = (event) => {
-    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
+    dispatchPassword({ type: 'USER_INPUT', val: event.target.value });
 
     // setFormIsValid(
     //   emailState.isValid && passwordState.isValid
     // );
   };
 
-  const validateEmailHandler = () => {
+  const validateEmailHandler = (event) => {
     // setEmailIsValid(emailState.isValid);
-    dispatchEmail({ type: "INPUT_BLUR" });
+    dispatchEmail({ type: 'INPUT_BLUR', val: event.target.value });
   };
 
-  const validatePasswordHandler = () => {
+  const validatePasswordHandler = (event) => {
     // setPasswordIsValid(passwordState.isValid);
-    dispatchPassword({ type: "INPUT_BLUR" });
+    dispatchPassword({ type: 'INPUT_BLUR', val: event.target.value });
   };
 
   const submitHandler = (event) => {
